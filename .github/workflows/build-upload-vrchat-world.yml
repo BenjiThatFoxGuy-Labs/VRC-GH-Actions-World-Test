@@ -145,13 +145,13 @@ jobs:
           rm -rf Assets/Editor.meta
 
         
-      - name: Downgrade VRCSDK to 3.7.1
-        working-directory: ${{ env.workspace-path }}
-        run: |
-          vrc-get remove com.vrchat.worlds -y
-          vrc-get remove com.vrchat.base -y
-          vrc-get install com.vrchat.worlds 3.7.1 -y
-          vrc-get install com.vrchat.base 3.7.1 -y
+      # - name: Downgrade VRCSDK to 3.7.1
+      #   working-directory: ${{ env.workspace-path }}
+      #   run: |
+      #     vrc-get remove com.vrchat.worlds -y
+      #     vrc-get remove com.vrchat.base -y
+      #     vrc-get install com.vrchat.worlds 3.7.1 -y
+      #     vrc-get install com.vrchat.base 3.7.1 -y
 
       - name: Add AutoBuild Packages to Workspace
         working-directory: ${{ env.workspace-path }}
