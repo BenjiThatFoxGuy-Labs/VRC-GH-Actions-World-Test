@@ -190,8 +190,7 @@ jobs:
             -batchmode -logFile - \
             -buildTarget Win64 \
             -quit \
-            -nographics \
-            -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
+            -nographics
         env:
           # VRC_AUTO_BUILD_CONTENT_ID: ${{ env.NIGHTLY_WORLD_CONTENT_ID }}
           # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
