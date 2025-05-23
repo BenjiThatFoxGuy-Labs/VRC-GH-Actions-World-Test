@@ -1,0 +1,16 @@
+{
+  "name": "fr.ckyre.uerp",
+  "displayName": "Unity Editor Discord Rich Presence",
+  "version": "0.0.2",
+  "description": "Discord's Rich Presence for Unity Editor (editor only!)\nThis script allow you to display on your discord activity :\r\n\r1. Unity version\r\n2. Project name\r\n3. Scene name\r\n4. Play or edit mode\r\n5. Working duration",
+  "gitDependencies": {},
+  "vpmDependencies": {},
+  "author": {
+    "name": "Author",
+    "email": "email@example.com",
+    "url": "https://example.com"
+  },
+  "legacyFolders": {},
+  "legacyFiles": {},
+  "unity": "2019.4"
+}
