@@ -18,7 +18,7 @@ jobs:
 
     env:
         #   unity-docker-image: mobsakai/unity3d:2022.3.22f1-windows-mono
-      unity-docker-image: unityci/editor:ubuntu-2022.3.22f1-windows-mono-3
+      unity-docker-image: unityci/editor:ubuntu-2022.3.22f1-windows-mono-3.1.0
       workspace-path: "${{ github.workspace }}"
       source-path: "${{ github.workspace }}"
       add-packages-script-path: "${{ github.workspace }}/.github/workflow-scripts/add-user-package-to-vrc-get.js"
