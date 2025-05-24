@@ -220,9 +220,6 @@ jobs:
             -e VRC_AUTO_BUILD_CONTENT_ID="${VRC_AUTO_BUILD_CONTENT_ID}" \
             "${{ env.unity-docker-image }}" \
             unity-editor -projectPath /project \
-            -username "${{ secrets.UNITY_EMAIL }}" \
-            -password "${{ secrets.UNITY_PASSWORD }}" \
-            -serial "${{ env.UNITY_SERIAL }}" \
             -batchmode -logFile - \
             -buildTarget Win64 \
             -disableAssemblyUpdater \
