@@ -190,6 +190,7 @@ jobs:
             -batchmode -logFile - \
             -buildTarget Win64 \
             -quit \
+            -disableAssemblyUpdater \
             -nographics
         env:
           # VRC_AUTO_BUILD_CONTENT_ID: ${{ env.NIGHTLY_WORLD_CONTENT_ID }}
