@@ -51,12 +51,6 @@ jobs:
       - name: Setup vrc-get
         uses: anatawa12/sh-actions/setup-vrc-get@master
 
-      - name: Set up WARP
-        uses: fscarmen/warp-on-actions@v1.3
-        with:
-          stack: ipv4        # Optional. Support [ ipv4, ipv6, dual ]. Default is dual.
-          mode: client    # Optional. Support [ wireguard, client ]. Default is wireguard.
-
       - name: Set up Unity
         run: |
           docker pull "${{ env.unity-docker-image }}"
