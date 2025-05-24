@@ -6,64 +6,17 @@
     "com.vrchat.core.vpm-resolver": {
       "version": "0.1.29"
     },
-    "dev.foxscore.easy-login": {
-      "version": "1.0.3"
-    },
-    "dev.onevr.vrworldtoolkit": {
-      "version": "3.2.1"
-    },
     "com.vrchat.base": {
       "version": "3.6.1"
     },
-    "dev.hai-vr.resilience.let-me-see": {
-      "version": "1.1.3"
+    "com.yuxiaviation.vrchat.autobuild.world": {
+      "version": "0.3.1"
     },
-    "com.nidonocu.vrcunitytoolbar": {
-      "version": "2.2.1"
-    },
-    "au.benjithatfoxguy.batchimportunitypackage": {
-      "version": "1.0.3"
-    },
-    "unity-editor-dark-mode": {
-      "version": "1.0.0"
-    },
-    "au.benjithatfoxguy.restartunity": {
-      "version": "0.0.1"
-    },
-    "au.benjithatfoxguy.templates.world.2022.3.22f1.updater": {
-      "version": "1.0.1"
-    },
-    "dev.hai-vr.resilience.toolkit": {
-      "version": "1.0.1"
+    "com.yuxiaviation.vrchat.autobuild": {
+      "version": "0.3.1"
     }
   },
   "locked": {
-    "au.benjithatfoxguy.batchimportunitypackage": {
-      "version": "1.0.3",
-      "dependencies": {}
-    },
-    "dev.hai-vr.resilience.let-me-see": {
-      "version": "1.1.3",
-      "dependencies": {}
-    },
-    "au.benjithatfoxguy.templates.world.2022.3.22f1.updater": {
-      "version": "1.0.1",
-      "dependencies": {}
-    },
-    "dev.onevr.vrworldtoolkit": {
-      "version": "3.2.1",
-      "dependencies": {}
-    },
-    "com.nidonocu.vrcunitytoolbar": {
-      "version": "2.2.1",
-      "dependencies": {
-        "com.vrchat.base": "^3.3.0"
-      }
-    },
-    "unity-editor-dark-mode": {
-      "version": "1.0.0",
-      "dependencies": {}
-    },
     "com.vrchat.worlds": {
       "version": "3.8.1",
       "dependencies": {
@@ -74,23 +27,22 @@
       "version": "0.1.29",
       "dependencies": {}
     },
-    "au.benjithatfoxguy.restartunity": {
-      "version": "0.0.1",
-      "dependencies": {}
-    },
-    "dev.foxscore.easy-login": {
-      "version": "1.0.3",
-      "dependencies": {
-        "com.vrchat.base": "^3.5.0"
-      }
-    },
     "com.vrchat.base": {
       "version": "3.8.1",
       "dependencies": {}
     },
-    "dev.hai-vr.resilience.toolkit": {
-      "version": "1.0.1",
-      "dependencies": {}
+    "com.yuxiaviation.vrchat.autobuild.world": {
+      "version": "0.3.1",
+      "dependencies": {
+        "com.vrchat.worlds": "^3.7.1",
+        "com.yuxiaviation.vrchat.autobuild": "0.3.1"
+      }
+    },
+    "com.yuxiaviation.vrchat.autobuild": {
+      "version": "0.3.1",
+      "dependencies": {
+        "com.vrchat.base": "^3.7.1"
+      }
     }
   }
 }
