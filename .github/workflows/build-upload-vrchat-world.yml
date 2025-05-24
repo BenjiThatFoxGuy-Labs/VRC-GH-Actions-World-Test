@@ -141,6 +141,7 @@ jobs:
           vrc-get remove au.benjithatfoxguy.restartunity -y
           vrc-get remove dev.hai-vr.resilience.let-me-see -y
           vrc-get remove dev.hai-vr.resilience.toolkit -y
+          vrc-get remove unity-editor-dark-mode -y
           rm -rf Assets/Editor
           rm -rf Assets/Editor.meta
 
