@@ -1,4 +1,4 @@
-name: Build & Upload World to VRChat
+name: Build & Upload World
 
 on:
   push:
