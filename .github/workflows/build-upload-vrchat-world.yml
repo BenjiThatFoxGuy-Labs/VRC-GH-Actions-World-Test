@@ -51,6 +51,12 @@ jobs:
       - name: Setup vrc-get
         uses: anatawa12/sh-actions/setup-vrc-get@master
 
+      - name: Set up WARP
+        uses: fscarmen/warp-on-actions@v1.3
+        with:
+          stack: dual        # Optional. Support [ ipv4, ipv6, dual ]. Default is dual.
+          mode: wireguard    # Optional. Support [ wireguard, client ]. Default is wireguard.
+
       - name: Add VPM Repositories
         run: |
           vrc-get repo add https://adjerry91.github.io/VRCFaceTracking-Templates/index.json
