@@ -127,9 +127,9 @@ jobs:
         working-directory: ${{ env.workspace-path }}
         run: "vrc-get resolve"
       
-      # - name: Add Patcher Package to fix SDK Build on Linux
-      #   working-directory: ${{ env.workspace-path }}
-      #   run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y
+      - name: Add Patcher Package to fix SDK Build on Linux
+        working-directory: ${{ env.workspace-path }}
+        run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y
         
       - name: Remove Unsupported Packages
         working-directory: ${{ env.workspace-path }}
