@@ -126,11 +126,7 @@ jobs:
       - name: Resolve VPM Dependencies
         working-directory: ${{ env.workspace-path }}
         run: "vrc-get resolve"
-      
-      - name: Add Patcher Package to fix SDK Build on Linux
-        working-directory: ${{ env.workspace-path }}
-        run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y
-        
+             
       - name: Remove Unsupported Packages
         working-directory: ${{ env.workspace-path }}
         run: |
@@ -156,6 +152,10 @@ jobs:
       - name: Add AutoBuild Packages to Workspace
         working-directory: ${{ env.workspace-path }}
         run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
+
+      - name: Add Patcher Package to fix SDK Build on Linux
+        working-directory: ${{ env.workspace-path }}
+        run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y
 
       - name: Cache Library
         uses: actions/cache@v4
