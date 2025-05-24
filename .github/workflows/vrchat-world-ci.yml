@@ -14,12 +14,12 @@ concurrency:
 
 jobs:
   build-and-upload-nightly-world:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
         #   unity-docker-image: mobsakai/unity3d:2022.3.22f1-windows-mono
-      # unity-docker-image: unityci/editor:ubuntu-2022.3.22f1-windows-mono-3.1.0
-      unity-docker-image: unityci/editor:windows-2022.3.22f1-windows-il2cpp-3.1.0
+      unity-docker-image: unityci/editor:ubuntu-2022.3.22f1-windows-mono-3.1.0
+      # unity-docker-image: unityci/editor:windows-2022.3.22f1-windows-il2cpp-3.1.0
       workspace-path: "${{ github.workspace }}"
       source-path: "${{ github.workspace }}"
       release-path: "${{ github.workspace }}/tmp/release"
