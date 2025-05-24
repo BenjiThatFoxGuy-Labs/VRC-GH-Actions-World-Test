@@ -22,37 +22,25 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
 
             var contentId = GetArgument(commandLineArgs, "--vrchat-auto-build-content-id", "VRC_AUTO_BUILD_CONTENT_ID");
             var scenePath = GetArgument(commandLineArgs, "--vrchat-auto-build-scene-path", "VRC_AUTO_BUILD_SCENE_PATH");
-            var username = GetArgument(commandLineArgs, "--vrchat-auto-build-username", "VRC_AUTO_BUILD_USERNAME");
-            var password = GetArgument(commandLineArgs, "--vrchat-auto-build-password", "VRC_AUTO_BUILD_PASSWORD");
-            var totpKey = GetArgument(commandLineArgs, "--vrchat-auto-build-totp-key", "VRC_AUTO_BUILD_TOTP_KEY");
+            var authCookie = GetArgument(commandLineArgs, "--vrchat-auto-build-auth-cookie", "VRC_AUTO_BUILD_AUTH_COOKIE");
+            var twoFactorAuthCookie = GetArgument(commandLineArgs, "--vrchat-auto-build-two-factor-auth-cookie", "VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE");
 
             if (scenePath == null)
             {
                 throw new ArgumentNullException(nameof(AutoBuildArguments.ScenePath), "Scene path is required");
             }
 
-            if (username == null)
+            if (authCookie == null)
             {
-                throw new ArgumentNullException(nameof(AutoBuildArguments.Username), "Username is required");
-            }
-
-            if (password == null)
-            {
-                throw new ArgumentNullException(nameof(AutoBuildArguments.Password), "Password is required");
-            }
-
-            if (totpKey == null)
-            {
-                throw new ArgumentNullException(nameof(AutoBuildArguments.TotpKey), "TOTP key is required");
+                throw new ArgumentNullException(nameof(AutoBuildArguments.AuthCookie), "Auth cookie is required");
             }
 
             return new AutoBuildArguments
             {
                 ContentId = contentId,
                 ScenePath = scenePath,
-                Username = username,
-                Password = password,
-                TotpKey = totpKey
+                AuthCookie = authCookie,
+                TwoFactorAuthCookie = twoFactorAuthCookie
             };
         }
 
@@ -200,31 +188,20 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
                 APIUser.InitialFetchCurrentUser(_ =>
                 {
                     AutoBuildLogger.Log($"Logged in as [{APIUser.CurrentUser.id}] {APIUser.CurrentUser.displayName}");
-
                     tcs.SetResult(true);
                 }, model =>
                 {
-                    if (model == null)
-                    {
-                        AutoBuildLogger.LogError(
-                            "Failed to initialize SDK Account: Failed to fetch current user: Unknown error (Model is null)");
-                        tcs.SetException(new Exception("Failed to fetch current user: Unknown error (Model is null)"));
-                        return;
-                    }
-
-                    AutoBuildLogger.LogError("Failed to initialize SDK Account: Failed to fetch current user: " + model.Error);
-                    tcs.SetException(new Exception("Failed to fetch current user: " + model.Error));
+                    AutoBuildLogger.LogError($"Failed to fetch current user: {model?.Error ?? "Unknown error"}");
+                    tcs.SetException(new Exception($"Failed to fetch current user: {model?.Error ?? "Unknown error"}"));
                 });
             }
             else
             {
                 _logOutWhenExit = true;
+                var args = GetArguments();
                 AutoBuildAuthentication.Login(
-                    GetArguments().Username,
-                    GetArguments().Password,
-                    GetArguments().TotpKey,
-                    GetArguments().AuthCookie,
-                    GetArguments().TwoFactorAuthCookie,
+                    args.AuthCookie,
+                    args.TwoFactorAuthCookie,
                     () => { tcs.SetResult(true); });
             }
 
