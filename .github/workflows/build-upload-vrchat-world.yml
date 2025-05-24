@@ -54,7 +54,7 @@ jobs:
       - name: Set up WARP
         uses: fscarmen/warp-on-actions@v1.3
         with:
-          stack: dual        # Optional. Support [ ipv4, ipv6, dual ]. Default is dual.
+          stack: ipv4        # Optional. Support [ ipv4, ipv6, dual ]. Default is dual.
           mode: wireguard    # Optional. Support [ wireguard, client ]. Default is wireguard.
 
       - name: Add VPM Repositories
