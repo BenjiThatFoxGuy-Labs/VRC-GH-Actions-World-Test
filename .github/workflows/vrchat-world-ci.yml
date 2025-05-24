@@ -202,9 +202,9 @@ jobs:
             -disableAssemblyUpdater \
             -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
-          # VRC_AUTO_BUILD_CONTENT_ID: ${{ env.NIGHTLY_WORLD_CONTENT_ID }}
           # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
-          VRC_AUTO_BUILD_CONTENT_ID: "wrld_67ed4bef-8dba-4e87-89e0-129030e65be7"
+          # VRC_AUTO_BUILD_CONTENT_ID: "wrld_67ed4bef-8dba-4e87-89e0-129030e65be7"
+          VRC_AUTO_BUILD_CONTENT_ID: ${{ env.NIGHTLY_WORLD_CONTENT_ID }}
           VRC_AUTO_BUILD_SCENE_PATH: Assets\Scenes\VRCDefaultWorldScene.unity
           VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME_2 }}
           VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD_2 }}
