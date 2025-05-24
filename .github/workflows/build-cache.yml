@@ -1,9 +1,11 @@
 name: Build VRChat World Cache
 
 on:
-  # push:
-  #   branches:
-  #     - master
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/build-cache.yml'
   release:
     types: [published]
   workflow_dispatch:
