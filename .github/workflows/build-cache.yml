@@ -140,6 +140,9 @@ jobs:
           vrc-get remove unity-editor-dark-mode -y
           rm -rf Assets/Editor
           rm -rf Assets/Editor.meta
+          rm -rf Assets/UERP
+          rm -rf Assets/UERP.meta
+
         
       - name: Downgrade VRCSDK to 3.7.1
         working-directory: ${{ env.workspace-path }}
