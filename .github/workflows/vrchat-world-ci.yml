@@ -27,6 +27,11 @@ jobs:
       UNITY_SERIAL: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
       - name: Download Release Package
         uses: robinraju/release-downloader@a96f54c1b5f5e09e47d9504526e96febd949d4c2
         if: github.event_name == 'release'
