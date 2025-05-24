@@ -7,7 +7,7 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
 {
     public static class AutoBuildAuthentication
     {
-        internal static void Login(string username, string authCookie, string twoFactorAuthCookie, Action onLogin)
+        internal static void Login(string authCookie, string twoFactorAuthCookie, Action onLogin)
         {
             API.SetOnlineMode(true);
             ApiCredentials.Load();
@@ -15,9 +15,9 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
             APIUser.Logout();
 
             if (!string.IsNullOrEmpty(authCookie) && !string.IsNullOrEmpty(twoFactorAuthCookie))
-                ApiCredentials.Set(username, username, "vrchat", authCookie, twoFactorAuthCookie);
+                ApiCredentials.Set("vrchat", "vrchat", "vrchat", authCookie, twoFactorAuthCookie);
             else if (!string.IsNullOrEmpty(authCookie))
-                ApiCredentials.Set(username, username, "vrchat", authCookie);
+                ApiCredentials.Set("vrchat", "vrchat", "vrchat", authCookie);
             else
             {
                 Debug.LogError("Authentication cookies are required.");
