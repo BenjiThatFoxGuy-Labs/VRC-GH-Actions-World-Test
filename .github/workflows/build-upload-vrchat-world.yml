@@ -1,9 +1,9 @@
 name: Build & Upload VRChat World
 
 on:
-  # push:
-  #   branches:
-  #     - master
+  push:
+    branches:
+      - master
   release:
     types: [published]
   workflow_dispatch:
@@ -155,7 +155,8 @@ jobs:
 
       - name: Add AutoBuild Packages to Workspace
         working-directory: ${{ env.workspace-path }}
-        run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
+        # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
+        run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y
 
       - name: Cache Library
         uses: actions/cache@v4
