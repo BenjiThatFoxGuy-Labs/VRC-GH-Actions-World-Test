@@ -1,9 +1,9 @@
 name: Build Cache for VRChat World Project
 
 on:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
   release:
     types: [published]
   workflow_dispatch:
