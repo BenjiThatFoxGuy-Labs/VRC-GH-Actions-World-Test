@@ -202,7 +202,11 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
                 AutoBuildAuthentication.Login(
                     args.AuthCookie,
                     args.TwoFactorAuthCookie,
-                    () => { tcs.SetResult(true); });
+                    () =>
+                    {
+                        AutoBuildLogger.Log("Login successful.");
+                        tcs.SetResult(true);
+                    });
             }
 
             await tcs.Task;
