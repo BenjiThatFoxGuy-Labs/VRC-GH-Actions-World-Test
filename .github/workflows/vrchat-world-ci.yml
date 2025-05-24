@@ -155,10 +155,10 @@ jobs:
           vrc-get install com.vrchat.worlds 3.7.2 -y
           vrc-get install com.vrchat.base 3.7.2 -y
 
-      # - name: Add AutoBuild Packages to Workspace
-      #   working-directory: ${{ env.workspace-path }}
+      - name: Add AutoBuild Packages to Workspace
+        working-directory: ${{ env.workspace-path }}
       #   # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
-      #   run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y
+        run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y
 
       #- name: Add Patcher Package to fix SDK Build on Linux
         #working-directory: ${{ env.workspace-path }}
