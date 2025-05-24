@@ -184,6 +184,8 @@ jobs:
             -e VRC_AUTO_BUILD_TOTP_KEY="${VRC_AUTO_BUILD_TOTP_KEY}" \
             -e VRC_AUTO_BUILD_SCENE_PATH="${VRC_AUTO_BUILD_SCENE_PATH}" \
             -e VRC_AUTO_BUILD_CONTENT_ID="${VRC_AUTO_BUILD_CONTENT_ID}" \
+            -e VRC_AUTO_BUILD_AUTH_COOKIE="${VRC_AUTO_BUILD_AUTH_COOKIE}" \
+            -e VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE="${VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE}" \
             "${{ env.unity-docker-image }}" \
             unity-editor -projectPath /project \
             -username "${{ secrets.UNITY_EMAIL }}" \
@@ -210,6 +212,8 @@ jobs:
             -e VRC_AUTO_BUILD_TOTP_KEY="${VRC_AUTO_BUILD_TOTP_KEY}" \
             -e VRC_AUTO_BUILD_SCENE_PATH="${VRC_AUTO_BUILD_SCENE_PATH}" \
             -e VRC_AUTO_BUILD_CONTENT_ID="${VRC_AUTO_BUILD_CONTENT_ID}" \
+            -e VRC_AUTO_BUILD_AUTH_COOKIE="${VRC_AUTO_BUILD_AUTH_COOKIE}" \
+            -e VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE="${VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE}" \
             "${{ env.unity-docker-image }}" \
             unity-editor -projectPath /project \
             -batchmode -logFile - \
@@ -224,3 +228,5 @@ jobs:
           VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME_2 }}
           VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD_2 }}
           VRC_AUTO_BUILD_TOTP_KEY: ${{ secrets.VRC_AUTO_BUILD_TOTP_KEY_2 }}
+          VRC_AUTO_BUILD_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_AUTH_COOKIE }}
+          VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE }}

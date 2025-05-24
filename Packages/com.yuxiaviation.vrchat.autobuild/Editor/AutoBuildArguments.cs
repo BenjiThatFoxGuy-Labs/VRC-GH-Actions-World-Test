@@ -8,5 +8,7 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild {
         public string Password;
         public string TotpKey;
         public string ScenePath;
+        public string AuthCookie;
+        public string TwoFactorAuthCookie;
     }
 }

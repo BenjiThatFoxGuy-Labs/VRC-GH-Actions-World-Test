@@ -9,7 +9,7 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
 {
     public static class AutoBuildAuthentication
     {
-        internal static void Login(string username, string password, string totpKey, Action onLogin)
+        internal static void Login(string username, string password, string totpKey, string authCookie, string twoFactorAuthCookie, Action onLogin)
         {
             API.SetOnlineMode(true);
             ApiCredentials.Load();
@@ -20,19 +20,9 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
                 {
                     var user = APIUser.CurrentUser;
 
-                    if (!model.Cookies.TryGetValue("auth", out var authCookie))
-                    {
-                        Debug.Log("No auth cookie found");
-                    }
-
-                    if (!model.Cookies.TryGetValue("twoFactorAuth", out var twoFactorAuthCookie))
-                    {
-                        Debug.Log("No 2FA cookie found");
-                    }
-
-                    if (twoFactorAuthCookie != null && authCookie != null)
+                    if (!string.IsNullOrEmpty(authCookie) && !string.IsNullOrEmpty(twoFactorAuthCookie))
                         ApiCredentials.Set(user.username, username, "vrchat", authCookie, twoFactorAuthCookie);
-                    else if (authCookie != null)
+                    else if (!string.IsNullOrEmpty(authCookie))
                         ApiCredentials.Set(user.username, username, "vrchat", authCookie);
 
                     Debug.Log($"Logged in as: [{user.id}] {user.displayName}");
@@ -42,11 +32,6 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
                 model => { Debug.LogError($"Failed to login: {model.Error}"); },
                 model =>
                 {
-                    if (model.Cookies.TryGetValue("auth", out var authCookie))
-                    {
-                        ApiCredentials.Set(username, username, "vrchat", authCookie);
-                    }
-
                     if (model.Model is not API2FA api2Fa)
                     {
                         Debug.LogError("Failed to get 2FA model");
@@ -73,7 +58,7 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
                         {
                             Debug.Log("2FA code verified");
 
-                            Login(username, password, totpKey, onLogin);
+                            Login(username, password, totpKey, authCookie, twoFactorAuthCookie, onLogin);
                         },
                         verifyModel =>
                         {
