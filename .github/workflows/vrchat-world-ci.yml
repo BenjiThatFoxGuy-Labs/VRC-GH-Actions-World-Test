@@ -21,32 +21,21 @@ jobs:
       unity-docker-image: unityci/editor:ubuntu-2022.3.22f1-windows-mono-3.1.0
       workspace-path: "${{ github.workspace }}"
       source-path: "${{ github.workspace }}"
+      release-path: "${{ github.workspace }}/tmp/release"
       add-packages-script-path: "${{ github.workspace }}/.github/workflow-scripts/add-user-package-to-vrc-get.js"
       get-serial-script-path: "${{ github.workspace }}/.github/workflow-scripts/get-serial-from-license-file.js"
       UNITY_SERIAL: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        if: github.event_name != 'release'
-        with:
-          path: ${{ env.source-path }}
-
       - name: Download Release Package
         uses: robinraju/release-downloader@a96f54c1b5f5e09e47d9504526e96febd949d4c2
         if: github.event_name == 'release'
         with:
           latest: true
           preRelease: false
-          out-file-path: ${{ env.source-path }}
+          out-file-path: ${{ env.release-path }}
           fileName: "*.zip"
           extract: true
-
-      - name: Setup Workspace Directory
-        if: github.event_name == 'release'
-        run: |
-          mkdir -p "${{ env.workspace-path }}"
-          cp -r ${{ env.source-path }}/* ${{ env.workspace-path }}/
 
       - name: Setup vrc-get
         uses: anatawa12/sh-actions/setup-vrc-get@master
@@ -54,6 +43,10 @@ jobs:
       - name: Set up Unity
         run: |
           docker pull "${{ env.unity-docker-image }}"
+
+      - name: Add Release Pacakge to vrc-get
+        if: github.event_name == 'release'
+        run: "node ${{ env.add-packages-script-path }} ${{ env.release-path }}"
 
       - name: Add VPM Repositories
         run: |
@@ -131,7 +124,6 @@ jobs:
         working-directory: ${{ env.workspace-path }}
         run: "vrc-get resolve"
       
-        
       - name: Remove Unsupported Packages
         working-directory: ${{ env.workspace-path }}
         run: |
