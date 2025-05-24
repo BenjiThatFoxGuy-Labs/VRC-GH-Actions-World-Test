@@ -32,11 +32,6 @@ jobs:
         with:
           path: ${{ env.source-path }}
 
-      - name: Setup WARP
-        uses: boywithkeyboard/warp@v1
-        with:
-          familyMode: malware
-
       - name: Download Release Package
         uses: robinraju/release-downloader@a96f54c1b5f5e09e47d9504526e96febd949d4c2
         if: github.event_name == 'release'
@@ -186,6 +181,32 @@ jobs:
           UNITY_SERIAL="$(echo $UNITY_LICENSE | node ${{ env.get-serial-script-path }})"
           echo "::add-mask::$UNITY_SERIAL"
           echo "UNITY_SERIAL=$UNITY_SERIAL" >> $GITHUB_ENV
+
+      - name: Get Unity License
+        run: |
+          docker run \
+            -v "${{ env.workspace-path }}:/project" \
+            -v "${{ github.workspace }}/tmp:/tmp/DefaultCompany/" \
+            -e VRC_AUTO_BUILD_USERNAME="${VRC_AUTO_BUILD_USERNAME}" \
+            -e VRC_AUTO_BUILD_PASSWORD="${VRC_AUTO_BUILD_PASSWORD}" \
+            -e VRC_AUTO_BUILD_TOTP_KEY="${VRC_AUTO_BUILD_TOTP_KEY}" \
+            -e VRC_AUTO_BUILD_SCENE_PATH="${VRC_AUTO_BUILD_SCENE_PATH}" \
+            -e VRC_AUTO_BUILD_CONTENT_ID="${VRC_AUTO_BUILD_CONTENT_ID}" \
+            "${{ env.unity-docker-image }}" \
+            unity-editor -projectPath /project \
+            -username "${{ secrets.UNITY_EMAIL }}" \
+            -password "${{ secrets.UNITY_PASSWORD }}" \
+            -serial "${{ env.UNITY_SERIAL }}" \
+            -batchmode -logFile - \
+            -buildTarget Win64 \
+            -quit \
+            -disableAssemblyUpdater \
+            -nographics
+
+      - name: Setup WARP
+        uses: boywithkeyboard/warp@v1
+        with:
+          familyMode: malware
 
       - name: Build & Upload VRChat World
         run: |
