@@ -191,6 +191,7 @@ jobs:
             -serial "${{ env.UNITY_SERIAL }}" \
             -batchmode -logFile - \
             -buildTarget Win64 \
+            -disableAssemblyUpdater \
             -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
           # VRC_AUTO_BUILD_CONTENT_ID: ${{ env.NIGHTLY_WORLD_CONTENT_ID }}
