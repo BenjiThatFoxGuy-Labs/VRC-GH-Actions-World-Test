@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-    runs-on: ubuntu-22.04
   build-cache-unity-project:
+    runs-on: ubuntu-latest
 
     env:
         #   unity-docker-image: mobsakai/unity3d:2022.3.22f1-windows-mono
@@ -28,23 +28,20 @@ jobs:
       UNITY_SERIAL: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
 
     steps:
-        uses: actions/checkout@v4
-        if: github.event_name != 'release'
+      - name: Checkout Repository
+        uses: actions/checkout@v3
         with:
-
+          fetch-depth: 0
+          
       - name: Download Release Package
         uses: robinraju/release-downloader@a96f54c1b5f5e09e47d9504526e96febd949d4c2
         if: github.event_name == 'release'
         with:
           latest: true
           preRelease: false
+          out-file-path: ${{ env.release-path }}
           fileName: "*.zip"
           extract: true
-
-        if: github.event_name == 'release'
-        run: |
-          mkdir -p "${{ env.workspace-path }}"
-          cp -r ${{ env.source-path }}/* ${{ env.workspace-path }}/
 
       - name: Setup vrc-get
         uses: anatawa12/sh-actions/setup-vrc-get@master
@@ -132,6 +129,7 @@ jobs:
       - name: Resolve VPM Dependencies
         working-directory: ${{ env.workspace-path }}
         run: "vrc-get resolve"
+      
       - name: Remove Unsupported Packages
         working-directory: ${{ env.workspace-path }}
         run: |
