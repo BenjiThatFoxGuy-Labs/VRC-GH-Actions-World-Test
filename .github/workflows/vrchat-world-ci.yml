@@ -57,6 +57,10 @@ jobs:
           stack: dual        # Optional. Support [ ipv4, ipv6, dual ]. Default is dual.
           mode: client    # Optional. Support [ wireguard, client ]. Default is wireguard.
 
+      - name: Set up Unity
+        run: |
+          docker pull "${{ env.unity-docker-image }}"
+
       - name: Add VPM Repositories
         run: |
           vrc-get repo add https://adjerry91.github.io/VRCFaceTracking-Templates/index.json
