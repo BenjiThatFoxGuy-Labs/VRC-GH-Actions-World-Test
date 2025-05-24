@@ -14,6 +14,9 @@
     },
     "com.yuxiaviation.vrchat.autobuild": {
       "version": "0.3.1"
+    },
+    "numeira.auto-certify-copyright-agreement": {
+      "version": "1.0.0"
     }
   },
   "locked": {
@@ -42,6 +45,12 @@
       "version": "0.3.1",
       "dependencies": {
         "com.vrchat.base": "^3.7.1"
+      }
+    },
+    "numeira.auto-certify-copyright-agreement": {
+      "version": "1.0.0",
+      "dependencies": {
+        "com.vrchat.base": "^3.8.0"
       }
     }
   }
