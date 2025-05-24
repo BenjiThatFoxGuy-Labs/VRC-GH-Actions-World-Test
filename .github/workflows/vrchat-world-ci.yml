@@ -32,6 +32,11 @@ jobs:
         with:
           path: ${{ env.source-path }}
 
+      - name: Setup WARP
+        uses: boywithkeyboard/warp@v1
+        with:
+          familyMode: malware
+
       - name: Download Release Package
         uses: robinraju/release-downloader@a96f54c1b5f5e09e47d9504526e96febd949d4c2
         if: github.event_name == 'release'
