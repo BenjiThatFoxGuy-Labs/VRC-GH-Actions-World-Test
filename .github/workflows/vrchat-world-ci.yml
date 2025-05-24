@@ -55,7 +55,7 @@ jobs:
         uses: fscarmen/warp-on-actions@v1.3
         with:
           stack: ipv4        # Optional. Support [ ipv4, ipv6, dual ]. Default is dual.
-          mode: wireguard    # Optional. Support [ wireguard, client ]. Default is wireguard.
+          mode: client    # Optional. Support [ wireguard, client ]. Default is wireguard.
 
       - name: Set up Unity
         run: |
