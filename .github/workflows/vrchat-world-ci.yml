@@ -133,18 +133,18 @@ jobs:
       - name: Remove Unsupported Packages
         working-directory: ${{ env.workspace-path }}
         run: |
-          vrc-get remove dev.foxscore.easy-login -y
-          vrc-get remove au.benjithatfoxguy.templates.world.2022.3.22f1.updater -y
-          vrc-get remove com.nidonocu.vrcunitytoolbar -y
-          vrc-get remove au.benjithatfoxguy.batchimportunitypackage -y
-          vrc-get remove au.benjithatfoxguy.restartunity -y
-          vrc-get remove dev.hai-vr.resilience.let-me-see -y
-          vrc-get remove dev.hai-vr.resilience.toolkit -y
-          vrc-get remove unity-editor-dark-mode -y
-          rm -rf Assets/Editor
-          rm -rf Assets/Editor.meta
-          rm -rf Assets/UERP
-          rm -rf Assets/UERP.meta
+          vrc-get remove dev.foxscore.easy-login -y || true
+          vrc-get remove au.benjithatfoxguy.templates.world.2022.3.22f1.updater -y || true
+          vrc-get remove com.nidonocu.vrcunitytoolbar -y || true
+          vrc-get remove au.benjithatfoxguy.batchimportunitypackage -y || true
+          vrc-get remove au.benjithatfoxguy.restartunity -y || true
+          vrc-get remove dev.hai-vr.resilience.let-me-see -y || true
+          vrc-get remove dev.hai-vr.resilience.toolkit -y || true
+          vrc-get remove unity-editor-dark-mode -y || true
+          rm -rf Assets/Editor || true
+          rm -rf Assets/Editor.meta || true
+          rm -rf Assets/UERP || true
+          rm -rf Assets/UERP.meta || true
 
         
       # - name: Downgrade VRCSDK to 3.7.1
