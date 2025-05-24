@@ -219,7 +219,12 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild
             else
             {
                 _logOutWhenExit = true;
-                AutoBuildAuthentication.Login(GetArguments().Username, GetArguments().Password, GetArguments().TotpKey,
+                AutoBuildAuthentication.Login(
+                    GetArguments().Username,
+                    GetArguments().Password,
+                    GetArguments().TotpKey,
+                    GetArguments().AuthCookie,
+                    GetArguments().TwoFactorAuthCookie,
                     () => { tcs.SetResult(true); });
             }
 
