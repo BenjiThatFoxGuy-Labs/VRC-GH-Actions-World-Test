@@ -158,7 +158,7 @@ jobs:
       - name: Add AutoBuild Packages to Workspace
         working-directory: ${{ env.workspace-path }}
       #   # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
-        run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y
+        run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
 
       - name: Add Patcher Package to fix SDK Build on Linux
         working-directory: ${{ env.workspace-path }}
