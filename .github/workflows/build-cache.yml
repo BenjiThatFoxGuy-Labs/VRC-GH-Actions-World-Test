@@ -266,7 +266,7 @@ jobs:
             -e VRC_AUTO_BUILD_AUTH_COOKIE="${VRC_AUTO_BUILD_AUTH_COOKIE}" `
             -e VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE="${VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE}" `
             "${{ env.unity-docker-image-windows }}" `
-            unity-editor -projectPath C:\Project `
+            Unity.exe -projectPath C:\Project `
             -username "${{ secrets.UNITY_EMAIL }}" `
             -password "${{ secrets.UNITY_PASSWORD }}" `
             -serial "${{ env.UNITY_SERIAL }}" `
