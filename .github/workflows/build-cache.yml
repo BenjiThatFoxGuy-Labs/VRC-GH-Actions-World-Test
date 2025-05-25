@@ -155,6 +155,7 @@ jobs:
         run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y || true
 
       - name: Add Patcher Package to fix SDK Build on Linux
+        if: runner.os == 'Linux'
         working-directory: ${{ env.workspace-path }}
         run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y || true
 
