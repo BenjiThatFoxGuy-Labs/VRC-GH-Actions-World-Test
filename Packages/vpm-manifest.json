@@ -17,6 +17,21 @@
     },
     "numeira.auto-certify-copyright-agreement": {
       "version": "1.0.0"
+    },
+    "au.benjithatfoxguy.restartunity": {
+      "version": "0.0.1"
+    },
+    "au.benjithatfoxguy.templates.world.2022.3.22f1.updater": {
+      "version": "1.0.1"
+    },
+    "au.benjithatfoxguy.batchimportunitypackage": {
+      "version": "1.0.3"
+    },
+    "dev.foxscore.easy-login": {
+      "version": "1.0.3"
+    },
+    "com.nidonocu.vrcunitytoolbar": {
+      "version": "2.2.1"
     }
   },
   "locked": {
@@ -51,6 +66,30 @@
       "version": "1.0.0",
       "dependencies": {
         "com.vrchat.base": "^3.8.0"
+      }
+    },
+    "au.benjithatfoxguy.restartunity": {
+      "version": "0.0.1",
+      "dependencies": {}
+    },
+    "au.benjithatfoxguy.templates.world.2022.3.22f1.updater": {
+      "version": "1.0.1",
+      "dependencies": {}
+    },
+    "au.benjithatfoxguy.batchimportunitypackage": {
+      "version": "1.0.3",
+      "dependencies": {}
+    },
+    "dev.foxscore.easy-login": {
+      "version": "1.0.3",
+      "dependencies": {
+        "com.vrchat.base": "^3.5.0"
+      }
+    },
+    "com.nidonocu.vrcunitytoolbar": {
+      "version": "2.2.1",
+      "dependencies": {
+        "com.vrchat.base": "^3.3.0"
       }
     }
   }
