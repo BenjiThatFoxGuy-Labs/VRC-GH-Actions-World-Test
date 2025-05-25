@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build-cache-unity-project:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
         #   unity-docker-image: mobsakai/unity3d:2022.3.22f1-windows-mono

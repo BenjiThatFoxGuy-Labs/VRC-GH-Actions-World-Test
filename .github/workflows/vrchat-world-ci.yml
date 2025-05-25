@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   build-and-upload-nightly-world:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
       unity-docker-image-linux: unityci/editor:ubuntu-2022.3.22f1-linux-il2cpp-3.1.0
