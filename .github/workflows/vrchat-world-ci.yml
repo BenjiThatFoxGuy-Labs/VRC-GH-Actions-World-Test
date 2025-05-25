@@ -236,7 +236,6 @@ jobs:
             -serial "${{ env.UNITY_SERIAL }}" \
             -batchmode -logFile - \
             -buildTarget Win64 \
-            -disableAssemblyUpdater \
             -quit
         env:
           # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
@@ -268,7 +267,6 @@ jobs:
             -serial "${{ env.UNITY_SERIAL }}" `
             -batchmode -logFile - `
             -buildTarget Win64 `
-            -disableAssemblyUpdater `
             -quit
         env:
           # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
