@@ -157,7 +157,7 @@ jobs:
 
       - name: Add Patcher Package to fix SDK Build on Linux
         working-directory: ${{ env.workspace-path }}
-        run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y
+        run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y || true
 
       # - name: Downgrade VRCSDK to 3.7.1
       #   working-directory: ${{ env.workspace-path }}
