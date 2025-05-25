@@ -259,7 +259,7 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ runner.os }}" == "Windows" ]]; then
-            UNITY_EXE="${{ env.UNITY_PATH }}/Unity.exe"
+            UNITY_EXE="${{ env.UNITY_PATH }}"
           else
             UNITY_EXE="${{ env.UNITY_PATH }}/Unity"
             chmod +x "$UNITY_EXE"
