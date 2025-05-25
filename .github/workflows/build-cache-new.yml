@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   build-cache-unity-project:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     env:
       workspace-path: "${{ github.workspace }}"

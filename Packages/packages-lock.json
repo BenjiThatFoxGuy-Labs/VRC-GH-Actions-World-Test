@@ -1,13 +1,25 @@
 {
   "dependencies": {
-    "cn.org.vrcd.vpm.vrchat-sdk-patcher": {
-      "version": "file:cn.org.vrcd.vpm.vrchat-sdk-patcher",
+    "au.benjithatfoxguy.batchimportunitypackage": {
+      "version": "file:au.benjithatfoxguy.batchimportunitypackage",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
     },
-    "cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds": {
-      "version": "file:cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds",
+    "au.benjithatfoxguy.restartunity": {
+      "version": "file:au.benjithatfoxguy.restartunity",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "au.benjithatfoxguy.templates.world.2022.3.22f1.updater": {
+      "version": "file:au.benjithatfoxguy.templates.world.2022.3.22f1.updater",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.nidonocu.vrcunitytoolbar": {
+      "version": "file:com.nidonocu.vrcunitytoolbar",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -188,13 +200,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.management": {
-      "version": "4.4.0",
+      "version": "4.5.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.subsystems": "1.0.0",
         "com.unity.modules.vr": "1.0.0",
         "com.unity.modules.xr": "1.0.0",
+        "com.unity.modules.subsystems": "1.0.0",
         "com.unity.xr.legacyinputhelpers": "2.1.7"
       },
       "url": "https://packages.unity.com"
@@ -243,20 +255,34 @@
         "com.unity.ai.navigation": "1.1.5"
       }
     },
-    "com.yuxiaviation.vrchat.autobuild": {
-      "version": "file:com.yuxiaviation.vrchat.autobuild",
+    "dev.foxscore.easy-login": {
+      "version": "file:dev.foxscore.easy-login",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
     },
-    "com.yuxiaviation.vrchat.autobuild.world": {
-      "version": "file:com.yuxiaviation.vrchat.autobuild.world",
+    "dev.hai-vr.resilience.let-me-see": {
+      "version": "file:dev.hai-vr.resilience.let-me-see",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.xr.management": "4.5.0"
+      }
+    },
+    "dev.hai-vr.resilience.toolkit": {
+      "version": "file:dev.hai-vr.resilience.toolkit",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
     },
     "numeira.auto-certify-copyright-agreement": {
       "version": "file:numeira.auto-certify-copyright-agreement",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "unity-editor-dark-mode": {
+      "version": "file:unity-editor-dark-mode",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
