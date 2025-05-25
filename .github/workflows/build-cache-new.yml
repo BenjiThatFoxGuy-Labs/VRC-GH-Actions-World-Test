@@ -271,7 +271,7 @@ jobs:
           "$UNITY_EXE" -projectPath "${{ env.workspace-path }}" \
             -username "${{ secrets.UNITY_EMAIL }}" \
             -password "${{ secrets.UNITY_PASSWORD }}" \
-            -serial "${{ env.UNITY_SERIAL }}" \
+            -serial "${{ secrets.UNITY_SERIAL }}" \
             -batchmode -logFile - \
             -buildTarget Win64 \
             -disableAssemblyUpdater \
