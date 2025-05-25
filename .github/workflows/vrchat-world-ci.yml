@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      unity-docker-image-linux: unityci/editor:ubuntu-2022.3.22f1-linux-il2cpp-3.1.0
+      unity-docker-image-linux: unityci/editor:ubuntu-2022.3.22f1-windows-mono-3.1.0
       unity-docker-image-windows: unityci/editor:windows-2022.3.22f1-windows-il2cpp-3.1.0
       workspace-path: "${{ github.workspace }}"
       source-path: "${{ github.workspace }}"
