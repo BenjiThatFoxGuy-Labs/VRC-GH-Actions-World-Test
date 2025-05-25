@@ -20,8 +20,8 @@ jobs:
 
     env:
         #   unity-docker-image: mobsakai/unity3d:2022.3.22f1-windows-mono
-      # unity-docker-image: unityci/editor:ubuntu-2022.3.22f1-windows-mono-3.1.0
-      unity-docker-image: unityci/editor:windows-2022.3.22f1-windows-il2cpp-3.1.0
+      unity-docker-image-linux: unityci/editor:ubuntu-2022.3.22f1-linux-il2cpp-3.1.0
+      unity-docker-image-windows: unityci/editor:windows-2022.3.22f1-windows-il2cpp-3.1.0
       workspace-path: "${{ github.workspace }}"
       source-path: "${{ github.workspace }}"
       release-path: "${{ github.workspace }}/tmp/release"
@@ -51,7 +51,7 @@ jobs:
       - name: Set up Unity
         if: runner.os == 'Linux'
         run: |
-          docker pull "${{ env.unity-docker-image }}"
+          docker pull "${{ env.unity-docker-image-linux }}"
 
       - name: Add Release Pacakge to vrc-get
         if: github.event_name == 'release'
@@ -233,7 +233,7 @@ jobs:
             -e VRC_AUTO_BUILD_CONTENT_ID="${VRC_AUTO_BUILD_CONTENT_ID}" \
             -e VRC_AUTO_BUILD_AUTH_COOKIE="${VRC_AUTO_BUILD_AUTH_COOKIE}" \
             -e VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE="${VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE}" \
-            "${{ env.unity-docker-image }}" \
+            "${{ env.unity-docker-image-linux }}" \
             unity-editor -projectPath /project \
             -username "${{ secrets.UNITY_EMAIL }}" \
             -password "${{ secrets.UNITY_PASSWORD }}" \
@@ -266,7 +266,7 @@ jobs:
             -e VRC_AUTO_BUILD_CONTENT_ID="${VRC_AUTO_BUILD_CONTENT_ID}" `
             -e VRC_AUTO_BUILD_AUTH_COOKIE="${VRC_AUTO_BUILD_AUTH_COOKIE}" `
             -e VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE="${VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE}" `
-            "${{ env.unity-docker-image }}" `
+            "${{ env.unity-docker-image-windows }}" `
             unity-editor -projectPath /project `
             -username "${{ secrets.UNITY_EMAIL }}" `
             -password "${{ secrets.UNITY_PASSWORD }}" `
