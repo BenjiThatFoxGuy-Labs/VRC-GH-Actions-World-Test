@@ -320,6 +320,7 @@ jobs:
             -disableAssemblyUpdater `
             -quit
         env:
+          UNITY_PATH: "C:\\Program Files\\Unity\\Hub\\Editor\\2022.3.22f1\\Editor\\Unity.exe"
           VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
           VRC_AUTO_BUILD_SCENE_PATH: Assets\Scenes\VRCDefaultWorldScene.unity
           VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME }}
