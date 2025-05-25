@@ -133,6 +133,7 @@ jobs:
         run: "vrc-get resolve"
       
       - name: Remove Unsupported Packages
+        if: runner.os == 'Linux'
         working-directory: ${{ env.workspace-path }}
         run: |
           vrc-get remove dev.foxscore.easy-login -y || true
@@ -148,11 +149,35 @@ jobs:
           rm -rf Assets/UERP || true
           rm -rf Assets/UERP.meta || true
 
+      - name: Remove Unsupported Packages
+        if: runner.os == 'Windows'
+        working-directory: ${{ env.workspace-path }}
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "SilentlyContinue"
+          vrc-get remove dev.foxscore.easy-login -y
+          vrc-get remove au.benjithatfoxguy.templates.world.2022.3.22f1.updater -y
+          vrc-get remove com.nidonocu.vrcunitytoolbar -y
+          vrc-get remove au.benjithatfoxguy.batchimportunitypackage -y
+          vrc-get remove au.benjithatfoxguy.restartunity -y
+          vrc-get remove dev.hai-vr.resilience.let-me-see -y
+          vrc-get remove dev.hai-vr.resilience.toolkit -y
+          vrc-get remove unity-editor-dark-mode -y
         
       - name: Add AutoBuild Packages to Workspace
+        if: runner.os == 'Linux'
         working-directory: ${{ env.workspace-path }}
         # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
         run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y || true
+
+      - name: Add AutoBuild Packages to Workspace
+        if: runner.os == 'Windows'
+        working-directory: ${{ env.workspace-path }}
+        shell: pwsh
+        # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
+        run: |
+          $ErrorActionPreference = "SilentlyContinue"
+          vrc-get install com.yuxiaviation.vrchat.autobuild.world -y
 
       - name: Add Patcher Package to fix SDK Build on Linux
         if: runner.os == 'Linux'
