@@ -1,0 +1,7 @@
+{
+    "name": "VRC World Development",
+    "postCreateCommand": "bash .github/workspace-scripts/setup.sh",
+    "remoteEnv": {
+        "UNITY_LICENSE": "${localEnv:UNITY_LICENSE}"
+    }
+}

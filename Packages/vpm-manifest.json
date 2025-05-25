@@ -17,6 +17,9 @@
     },
     "numeira.auto-certify-copyright-agreement": {
       "version": "1.0.0"
+    },
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds": {
+      "version": "0.5.3"
     }
   },
   "locked": {
@@ -51,6 +54,19 @@
       "version": "1.0.0",
       "dependencies": {
         "com.vrchat.base": "^3.8.0"
+      }
+    },
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds": {
+      "version": "0.5.3",
+      "dependencies": {
+        "cn.org.vrcd.vpm.vrchat-sdk-patcher": "0.5.3",
+        "com.vrchat.worlds": ">=3.5.0"
+      }
+    },
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher": {
+      "version": "0.5.3",
+      "dependencies": {
+        "com.vrchat.base": ">=3.5.0"
       }
     }
   }

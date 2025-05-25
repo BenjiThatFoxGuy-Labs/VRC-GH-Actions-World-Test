@@ -1,5 +1,17 @@
 {
   "dependencies": {
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher": {
+      "version": "file:cn.org.vrcd.vpm.vrchat-sdk-patcher",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds": {
+      "version": "file:cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.spoiledcat.git": {
       "version": "1.0.44",
       "depth": 0,
@@ -180,9 +192,9 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
+        "com.unity.modules.subsystems": "1.0.0",
         "com.unity.modules.vr": "1.0.0",
         "com.unity.modules.xr": "1.0.0",
-        "com.unity.modules.subsystems": "1.0.0",
         "com.unity.xr.legacyinputhelpers": "2.1.7"
       },
       "url": "https://packages.unity.com"

@@ -87,3 +87,10 @@ mono_crash.d5912f8e2.0.json
 /Assets/Cache~
 test.bat
 unity.log
+Assets/Editor
+Assets/Editor.meta
+Assets/UERP
+Assets/UERP.meta
+*.ulf
+# Secret files
+.secrets/
