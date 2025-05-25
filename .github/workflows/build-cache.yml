@@ -49,6 +49,7 @@ jobs:
         uses: anatawa12/sh-actions/setup-vrc-get@master
 
       - name: Set up Unity
+        if: runner.os == 'Linux'
         run: |
           docker pull "${{ env.unity-docker-image }}"
 
