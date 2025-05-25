@@ -202,12 +202,23 @@ jobs:
             Library-Build-
 
       - name: Get Unity Serial
+        if: runner.os == 'Linux'
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
           UNITY_SERIAL="$(echo $UNITY_LICENSE | node ${{ env.get-serial-script-path }})"
           echo "::add-mask::$UNITY_SERIAL"
           echo "UNITY_SERIAL=$UNITY_SERIAL" >> $GITHUB_ENV
+
+      - name: Get Unity Serial
+        if: runner.os == 'Windows'
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        shell: pwsh
+        run: |
+          $UNITY_SERIAL = (echo $env:UNITY_LICENSE | node ${{ env.get-serial-script-path }})
+          Write-Host "::add-mask::$UNITY_SERIAL"
+          Write-Host "UNITY_SERIAL=$UNITY_SERIAL" >> $env:GITHUB_ENV
 
       - name: Build & Upload VRChat World
         run: |
