@@ -309,16 +309,16 @@ jobs:
 
       - name: Build & Upload VRChat World
         if: runner.os == 'Windows'
-        shell: pwsh
+        shell: cmd
         run: |
-          & "${{ env.UNITY_PATH }}" `
-            -projectPath "${{ env.workspace-path }}\${{ env.VRC_AUTO_BUILD_SCENE_PATH }}" `
-            -username "${{ secrets.UNITY_EMAIL }}" `
-            -password "${{ secrets.UNITY_PASSWORD }}" `
-            -serial "${{ secrets.UNITY_SERIAL }}" `
-            -batchmode -logFile - `
-            -buildTarget Win64 `
-            -disableAssemblyUpdater `
+          "${{ env.UNITY_PATH }}" ^
+            -projectPath "${{ env.workspace-path }}" ^
+            -username "${{ secrets.UNITY_EMAIL }}" ^
+            -password "${{ secrets.UNITY_PASSWORD }}" ^
+            -serial "${{ secrets.UNITY_SERIAL }}" ^
+            -batchmode -logFile - ^
+            -buildTarget Win64 ^
+            -disableAssemblyUpdater ^
             -quit
         env:
           UNITY_PATH: "C:\\Program Files\\Unity\\Hub\\Editor\\2022.3.22f1\\Editor\\Unity.exe"
