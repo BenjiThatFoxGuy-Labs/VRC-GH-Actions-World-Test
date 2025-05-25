@@ -16,10 +16,7 @@ concurrency:
 
 jobs:
   build-cache-unity-project:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     env:
       workspace-path: "${{ github.workspace }}"
@@ -51,7 +48,7 @@ jobs:
       - name: Setup Unity
         uses: kuler90/setup-unity@v1
         with:
-          unity-modules: ${{ matrix.os == 'windows-latest' && 'windows-il2cpp' || 'linux-il2cpp' }}
+          unity-modules: ${{ runner.os == 'Windows' && 'windows-il2cpp' || 'linux-il2cpp' }}
           unity-version: 2022.3.22f1
 
       - name: Add Release Pacakge to vrc-get
@@ -134,7 +131,23 @@ jobs:
         working-directory: ${{ env.workspace-path }}
         run: "vrc-get resolve"
       
-      - name: Remove Unsupported Packages
+      - name: Remove Unsupported Packages (Windows)
+        if: runner.os == 'Windows'
+        working-directory: ${{ env.workspace-path }}
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "SilentlyContinue"
+          vrc-get remove dev.foxscore.easy-login -y || true
+          vrc-get remove au.benjithatfoxguy.templates.world.2022.3.22f1.updater -y || true
+          vrc-get remove com.nidonocu.vrcunitytoolbar -y || true
+          vrc-get remove au.benjithatfoxguy.batchimportunitypackage -y || true
+          vrc-get remove au.benjithatfoxguy.restartunity -y || true
+          vrc-get remove dev.hai-vr.resilience.let-me-see -y || true
+          vrc-get remove dev.hai-vr.resilience.toolkit -y || true
+          vrc-get remove unity-editor-dark-mode -y || true
+
+      - name: Remove Unsupported Packages (Non-Windows)
+        if: runner.os != 'Windows'
         working-directory: ${{ env.workspace-path }}
         shell: bash
         run: |
@@ -151,35 +164,20 @@ jobs:
           rm -rf Assets/UERP || true
           rm -rf Assets/UERP.meta || true
 
-      - name: Remove Unsupported Packages
+      - name: Add AutoBuild Packages to Workspace (Windows)
         if: runner.os == 'Windows'
         working-directory: ${{ env.workspace-path }}
         shell: pwsh
-        run: |
-          $ErrorActionPreference = "SilentlyContinue"
-          vrc-get remove dev.foxscore.easy-login -y
-          vrc-get remove au.benjithatfoxguy.templates.world.2022.3.22f1.updater -y
-          vrc-get remove com.nidonocu.vrcunitytoolbar -y
-          vrc-get remove au.benjithatfoxguy.batchimportunitypackage -y
-          vrc-get remove au.benjithatfoxguy.restartunity -y
-          vrc-get remove dev.hai-vr.resilience.let-me-see -y
-          vrc-get remove dev.hai-vr.resilience.toolkit -y
-          vrc-get remove unity-editor-dark-mode -y
-        
-      - name: Add AutoBuild Packages to Workspace
-        if: runner.os == 'Linux'
-        working-directory: ${{ env.workspace-path }}
-        # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
-        run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y || true
-
-      - name: Add AutoBuild Packages to Workspace
-        if: runner.os == 'Windows'
-        working-directory: ${{ env.workspace-path }}
-        shell: pwsh
-        # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
         run: |
           $ErrorActionPreference = "SilentlyContinue"
           vrc-get install com.yuxiaviation.vrchat.autobuild.world -y
+
+      - name: Add AutoBuild Packages to Workspace (Non-Windows)
+        if: runner.os != 'Windows'
+        working-directory: ${{ env.workspace-path }}
+        shell: bash
+        run: |
+          vrc-get install com.yuxiaviation.vrchat.autobuild.world -y || true
 
       - name: Add Patcher Package to fix SDK Build on Linux
         if: runner.os == 'Linux'
@@ -224,7 +222,7 @@ jobs:
       - name: Build & Upload VRChat World
         shell: bash
         run: |
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+          if [[ "${{ runner.os }}" == "Windows" ]]; then
             UNITY_EXE="${{ env.UNITY_PATH }}/Unity.exe"
           else
             UNITY_EXE="${{ env.UNITY_PATH }}/Unity"
