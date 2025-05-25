@@ -221,6 +221,7 @@ jobs:
           Write-Host "UNITY_SERIAL=$UNITY_SERIAL" >> $env:GITHUB_ENV
 
       - name: Build & Upload VRChat World
+        if: runner.os == 'Linux'
         run: |
           docker run \
             -v "${{ env.workspace-path }}:/project" \
@@ -246,8 +247,41 @@ jobs:
           # VRC_AUTO_BUILD_CONTENT_ID: "wrld_67ed4bef-8dba-4e87-89e0-129030e65be7"
           VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
           VRC_AUTO_BUILD_SCENE_PATH: Assets\Scenes\VRCDefaultWorldScene.unity
-          VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME_2 }}
-          VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD_2 }}
-          VRC_AUTO_BUILD_TOTP_KEY: ${{ secrets.VRC_AUTO_BUILD_TOTP_KEY_2 }}
+          VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME }}
+          VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD }}
+          VRC_AUTO_BUILD_TOTP_KEY: ${{ secrets.VRC_AUTO_BUILD_TOTP_KEY }}
+          VRC_AUTO_BUILD_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_AUTH_COOKIE }}
+          VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE }}
+
+      - name: Build & Upload VRChat World
+        if: runner.os == 'Windows'
+        run: |
+          docker run `
+            -v "${{ env.workspace-path }}:/project" `
+            -v "${{ github.workspace }}/tmp:/tmp/DefaultCompany/" `
+            -e VRC_AUTO_BUILD_USERNAME="${VRC_AUTO_BUILD_USERNAME}" `
+            -e VRC_AUTO_BUILD_PASSWORD="${VRC_AUTO_BUILD_PASSWORD}" `
+            -e VRC_AUTO_BUILD_TOTP_KEY="${VRC_AUTO_BUILD_TOTP_KEY}" `
+            -e VRC_AUTO_BUILD_SCENE_PATH="${VRC_AUTO_BUILD_SCENE_PATH}" `
+            -e VRC_AUTO_BUILD_CONTENT_ID="${VRC_AUTO_BUILD_CONTENT_ID}" `
+            -e VRC_AUTO_BUILD_AUTH_COOKIE="${VRC_AUTO_BUILD_AUTH_COOKIE}" `
+            -e VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE="${VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE}" `
+            "${{ env.unity-docker-image }}" `
+            unity-editor -projectPath /project `
+            -username "${{ secrets.UNITY_EMAIL }}" `
+            -password "${{ secrets.UNITY_PASSWORD }}" `
+            -serial "${{ env.UNITY_SERIAL }}" `
+            -batchmode -logFile - `
+            -buildTarget Win64 `
+            -disableAssemblyUpdater `
+            -quit
+        env:
+          # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
+          # VRC_AUTO_BUILD_CONTENT_ID: "wrld_67ed4bef-8dba-4e87-89e0-129030e65be7"
+          VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
+          VRC_AUTO_BUILD_SCENE_PATH: Assets\Scenes\VRCDefaultWorldScene.unity
+          VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME }}
+          VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD }}
+          VRC_AUTO_BUILD_TOTP_KEY: ${{ secrets.VRC_AUTO_BUILD_TOTP_KEY }}
           VRC_AUTO_BUILD_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_AUTH_COOKIE }}
           VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE }}
