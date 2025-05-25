@@ -311,7 +311,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          "${{ env.UNITY_PATH }}" `
+          & "${{ env.UNITY_PATH }}" `
             -projectPath "${{ env.workspace-path }}\${{ env.VRC_AUTO_BUILD_SCENE_PATH }}" `
             -username "${{ secrets.UNITY_EMAIL }}" `
             -password "${{ secrets.UNITY_PASSWORD }}" `
