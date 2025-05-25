@@ -6,6 +6,7 @@ on:
       - master
     paths-ignore:
       - .github/workflows/build-cache.yml
+      - .github/workflows/build-cache-new.yml
       - .github/workspace-scripts/
   release:
     types: [published]
