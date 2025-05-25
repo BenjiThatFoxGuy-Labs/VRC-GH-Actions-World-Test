@@ -198,6 +198,7 @@ jobs:
             Library-Build-
 
       - name: Get Unity Serial
+        if: runner.os == 'Linux'
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         run: |
@@ -205,7 +206,18 @@ jobs:
           echo "::add-mask::$UNITY_SERIAL"
           echo "UNITY_SERIAL=$UNITY_SERIAL" >> $GITHUB_ENV
 
+      - name: Get Unity Serial
+        if: runner.os == 'Windows'
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        shell: pwsh
+        run: |
+          $UNITY_SERIAL = (echo $env:UNITY_LICENSE | node ${{ env.get-serial-script-path }})
+          Write-Host "::add-mask::$UNITY_SERIAL"
+          Write-Host "UNITY_SERIAL=$UNITY_SERIAL" >> $env:GITHUB_ENV
+
       - name: Build & Upload VRChat World
+        if: runner.os == 'Linux'
         run: |
           docker run \
             -v "${{ env.workspace-path }}:/project" \
@@ -225,6 +237,30 @@ jobs:
             -batchmode -logFile - \
             -buildTarget Win64 \
             -disableAssemblyUpdater \
+            -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
+        env:
+          # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
+          # VRC_AUTO_BUILD_CONTENT_ID: "wrld_67ed4bef-8dba-4e87-89e0-129030e65be7"
+          VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
+          VRC_AUTO_BUILD_SCENE_PATH: Assets\Scenes\VRCDefaultWorldScene.unity
+          VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME }}
+          VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD }}
+          VRC_AUTO_BUILD_TOTP_KEY: ${{ secrets.VRC_AUTO_BUILD_TOTP_KEY }}
+          VRC_AUTO_BUILD_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_AUTH_COOKIE }}
+          VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE }}
+
+      - name: Build & Upload VRChat World
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          & "C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Unity.exe" `
+            -projectPath ${{ env.workspace-path }} `
+            -username "${{ secrets.UNITY_EMAIL }}" `
+            -password "${{ secrets.UNITY_PASSWORD }}" `
+            -serial "${{ env.UNITY_SERIAL }}" `
+            -batchmode -logFile - `
+            -buildTarget Win64 `
+            -disableAssemblyUpdater `
             -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
           # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
