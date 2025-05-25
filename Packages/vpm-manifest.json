@@ -9,12 +9,6 @@
     "com.vrchat.base": {
       "version": "3.6.1"
     },
-    "com.yuxiaviation.vrchat.autobuild.world": {
-      "version": "0.3.1"
-    },
-    "com.yuxiaviation.vrchat.autobuild": {
-      "version": "0.3.1"
-    },
     "numeira.auto-certify-copyright-agreement": {
       "version": "1.0.0"
     },
@@ -57,19 +51,6 @@
     "com.vrchat.base": {
       "version": "3.8.1",
       "dependencies": {}
-    },
-    "com.yuxiaviation.vrchat.autobuild.world": {
-      "version": "0.3.1",
-      "dependencies": {
-        "com.vrchat.worlds": "^3.7.1",
-        "com.yuxiaviation.vrchat.autobuild": "0.3.1"
-      }
-    },
-    "com.yuxiaviation.vrchat.autobuild": {
-      "version": "0.3.1",
-      "dependencies": {
-        "com.vrchat.base": "^3.7.1"
-      }
     },
     "numeira.auto-certify-copyright-agreement": {
       "version": "1.0.0",
