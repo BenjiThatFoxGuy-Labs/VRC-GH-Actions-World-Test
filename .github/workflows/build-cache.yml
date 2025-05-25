@@ -257,8 +257,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           docker run `
-            -v "${{ env.workspace-path }}:/project" `
-            -v "${{ github.workspace }}/tmp:/tmp/DefaultCompany/" `
+            -v "${{ env.workspace-path }}:C:\Project" `
             -e VRC_AUTO_BUILD_USERNAME="${VRC_AUTO_BUILD_USERNAME}" `
             -e VRC_AUTO_BUILD_PASSWORD="${VRC_AUTO_BUILD_PASSWORD}" `
             -e VRC_AUTO_BUILD_TOTP_KEY="${VRC_AUTO_BUILD_TOTP_KEY}" `
@@ -267,7 +266,7 @@ jobs:
             -e VRC_AUTO_BUILD_AUTH_COOKIE="${VRC_AUTO_BUILD_AUTH_COOKIE}" `
             -e VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE="${VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE}" `
             "${{ env.unity-docker-image-windows }}" `
-            unity-editor -projectPath /project `
+            unity-editor -projectPath C:\Project `
             -username "${{ secrets.UNITY_EMAIL }}" `
             -password "${{ secrets.UNITY_PASSWORD }}" `
             -serial "${{ env.UNITY_SERIAL }}" `
