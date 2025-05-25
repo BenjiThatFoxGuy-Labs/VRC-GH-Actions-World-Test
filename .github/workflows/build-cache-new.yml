@@ -26,6 +26,9 @@ jobs:
       get-serial-script-path: "${{ github.workspace }}/.github/workflow-scripts/get-serial-from-license-file.js"
       UNITY_SERIAL: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
       UNITY_NO_SANDBOX: true
+      UNITY_VERSION: 2022.3.22f1
+      UNITY_DOWNLOAD_HASH: 887be4894c44
+      UNITY_INSTALL_DIR: /opt/unity
 
     steps:
       - name: Checkout Repository
@@ -98,6 +101,16 @@ jobs:
         with:
           unity-modules: ${{ runner.os == 'Windows' && 'windows-il2cpp' || 'linux-il2cpp' }}
           unity-version: 2022.3.22f1
+
+      - name: Install Unity on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo mkdir -p ${{ env.UNITY_INSTALL_DIR }}
+          sudo chmod 777 ${{ env.UNITY_INSTALL_DIR }}
+          wget -O /tmp/UnitySetup "https://download.unity3d.com/download_unity/${{ env.UNITY_DOWNLOAD_HASH }}/UnitySetup-${{ env.UNITY_VERSION }}"
+          chmod +x /tmp/UnitySetup
+          yes | /tmp/UnitySetup --unattended --install-location=${{ env.UNITY_INSTALL_DIR }} --components=Unity,Linux-IL2CPP
+          sudo chmod -R a+rx ${{ env.UNITY_INSTALL_DIR }}/Editor/Unity
 
       - name: Add Release Pacakge to vrc-get
         if: github.event_name == 'release'
@@ -268,17 +281,14 @@ jobs:
       #     Write-Host "UNITY_SERIAL=$UNITY_SERIAL" >> $env:GITHUB_ENV
 
       - name: Build & Upload VRChat World
+        if: runner.os == 'Linux'
         shell: bash
         run: |
-          if [[ "${{ runner.os }}" == "Windows" ]]; then
-            UNITY_EXE="${{ env.UNITY_PATH }}"
-          else
-            UNITY_EXE="${{ env.UNITY_PATH }}/Unity"
-            chmod +x "$UNITY_EXE"
-            # Run Unity with xvfb
-            export DISPLAY=:99
-            Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-          fi
+          UNITY_EXE="${{ env.UNITY_PATH }}/Unity"
+          chmod +x "$UNITY_EXE"
+          # Run Unity with xvfb
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
           
           "$UNITY_EXE" -projectPath "${{ env.workspace-path }}" \
             -username "${{ secrets.UNITY_EMAIL }}" \
@@ -287,6 +297,27 @@ jobs:
             -batchmode -logFile - \
             -buildTarget Win64 \
             -disableAssemblyUpdater \
+            -quit
+        env:
+          VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
+          VRC_AUTO_BUILD_SCENE_PATH: Assets\Scenes\VRCDefaultWorldScene.unity
+          VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME }}
+          VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD }}
+          VRC_AUTO_BUILD_TOTP_KEY: ${{ secrets.VRC_AUTO_BUILD_TOTP_KEY }}
+          VRC_AUTO_BUILD_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_AUTH_COOKIE }}
+          VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE: ${{ secrets.VRC_AUTO_BUILD_TWO_FACTOR_AUTH_COOKIE }}
+
+      - name: Build & Upload VRChat World
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          "${{ env.UNITY_PATH }}" -projectPath "${{ env.workspace-path }}" `
+            -username "${{ secrets.UNITY_EMAIL }}" `
+            -password "${{ secrets.UNITY_PASSWORD }}" `
+            -serial "${{ secrets.UNITY_SERIAL }}" `
+            -batchmode -logFile - `
+            -buildTarget Win64 `
+            -disableAssemblyUpdater `
             -quit
         env:
           VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
