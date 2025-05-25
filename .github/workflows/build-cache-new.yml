@@ -46,11 +46,29 @@ jobs:
         id: setup-vrc-get
         uses: anatawa12/sh-actions/setup-vrc-get@master
 
-      - name: Setup FUSE
+      - name: Cache FUSE
         if: runner.os == 'Linux'
+        id: cache-fuse
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/bin/fusermount
+            /usr/lib/x86_64-linux-gnu/libfuse*
+            /etc/fuse.conf
+          key: fuse-install-${{ runner.os }}
+
+      - name: Setup FUSE
+        if: runner.os == 'Linux' && steps.cache-fuse.outputs.cache-hit != 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y fuse libfuse2
+          sudo modprobe fuse
+          sudo groupadd fuse || true
+          sudo usermod -a -G fuse $USER || true
+
+      - name: Configure FUSE
+        if: runner.os == 'Linux' && steps.cache-fuse.outputs.cache-hit == 'true'
+        run: |
           sudo modprobe fuse
           sudo groupadd fuse || true
           sudo usermod -a -G fuse $USER || true
