@@ -236,7 +236,7 @@ jobs:
             -serial "${{ env.UNITY_SERIAL }}" \
             -batchmode -logFile - \
             -buildTarget Win64 \
-            -quit
+            -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
           # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
           # VRC_AUTO_BUILD_CONTENT_ID: "wrld_67ed4bef-8dba-4e87-89e0-129030e65be7"
@@ -267,7 +267,7 @@ jobs:
             -serial "${{ env.UNITY_SERIAL }}" `
             -batchmode -logFile - `
             -buildTarget Win64 `
-            -quit
+            -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
           # VRC_AUTO_BUILD_SCENE_PATH: ${{ env.WORKSPACE_SCENE_PATH }}
           # VRC_AUTO_BUILD_CONTENT_ID: "wrld_67ed4bef-8dba-4e87-89e0-129030e65be7"
