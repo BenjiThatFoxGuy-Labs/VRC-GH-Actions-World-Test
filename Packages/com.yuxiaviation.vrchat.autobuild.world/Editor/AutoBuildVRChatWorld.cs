@@ -46,6 +46,11 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild.Worlds {
 
             var worldId = args.ContentId;
 
+            if (string.IsNullOrEmpty(worldId)) {
+                AutoBuildBase.ExitWithException(new Exception("World ID is null or empty."));
+                return;
+            }
+
             AutoBuildLogger.BeginLogGroup("Build and upload world");
             AutoBuildLogger.Log("Building world");
 
@@ -60,7 +65,19 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild.Worlds {
             AutoBuildLogger.Log("World build complete");
 
             AutoBuildLogger.Log($"Fetching world: {worldId}");
-            var world = await FetchWorldAsync(worldId);
+            VRCWorld world = null;
+            try {
+                world = await FetchWorldAsync(worldId);
+                if (world == null)
+                {
+                    throw new Exception("Fetched world is null.");
+                }
+            }
+            catch (Exception e)
+            {
+                AutoBuildBase.ExitWithException(e);
+                return;
+            }
             AutoBuildLogger.Log(
                 $"Fetched world: [{world.ID}] {world.Name} by {world.AuthorName}\nDescription: {world.Description}");
 
@@ -81,38 +98,11 @@ namespace VRChatAerospaceUniversity.VRChatAutoBuild.Worlds {
             EditorApplication.Exit(0);
         }
 
-        private static async Task BuildAsync() {
-            if (!VRCSdkControlPanel.TryGetBuilder<IVRCSdkWorldBuilderApi>(out var builder)) {
-                throw new Exception("Failed to get world builder");
-            }
-
-            var hasIsCompilingNoticed = false;
-            while (EditorApplication.isCompiling)
-            {
-                if (hasIsCompilingNoticed) continue;
-
-                AutoBuildLogger.Log("Waiting for scripts to compile");
-                hasIsCompilingNoticed = true;
-            }
-
-            await builder.Build();
-        }
-
-        private static async Task UploadAsync(VRCWorld world) {
-            if (!VRCSdkControlPanel.TryGetBuilder<IVRCSdkWorldBuilderApi>(out var builder)) {
-                throw new Exception("Failed to get world builder");
-            }
-
-            try {
-                await builder.UploadLastBuild(world);
-            }
-            catch (Exception e) {
-                throw new Exception("Failed to upload world", e);
-            }
-        }
-
         private static async Task<VRCWorld> FetchWorldAsync(string worldId) {
+            if (string.IsNullOrEmpty(worldId))
+                throw new ArgumentException("worldId must not be null or empty", nameof(worldId));
             try {
+                // If VRCApi is problematic, consider wrapping this in a using for HttpClient if possible
                 return await VRCApi.GetWorld(worldId, true);
             }
             catch (Exception e)
