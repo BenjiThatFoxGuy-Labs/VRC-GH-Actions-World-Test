@@ -12,14 +12,8 @@
     "numeira.auto-certify-copyright-agreement": {
       "version": "1.0.0"
     },
-    "au.benjithatfoxguy.restartunity": {
-      "version": "0.0.1"
-    },
     "au.benjithatfoxguy.templates.world.2022.3.22f1.updater": {
       "version": "1.0.1"
-    },
-    "au.benjithatfoxguy.batchimportunitypackage": {
-      "version": "1.0.3"
     },
     "dev.foxscore.easy-login": {
       "version": "1.0.3"
@@ -35,13 +29,19 @@
     },
     "unity-editor-dark-mode": {
       "version": "1.0.0"
+    },
+    "au.benjithatfoxguy.simplebuttonsui": {
+      "version": "0.0.3"
+    },
+    "au.benjithatfoxguy.uerp": {
+      "version": "0.0.1"
     }
   },
   "locked": {
     "com.vrchat.worlds": {
-      "version": "3.8.1",
+      "version": "3.8.2",
       "dependencies": {
-        "com.vrchat.base": "3.8.1"
+        "com.vrchat.base": "3.8.2"
       }
     },
     "com.vrchat.core.vpm-resolver": {
@@ -49,7 +49,7 @@
       "dependencies": {}
     },
     "com.vrchat.base": {
-      "version": "3.8.1",
+      "version": "3.8.2",
       "dependencies": {}
     },
     "numeira.auto-certify-copyright-agreement": {
@@ -58,17 +58,11 @@
         "com.vrchat.base": "^3.8.0"
       }
     },
-    "au.benjithatfoxguy.restartunity": {
-      "version": "0.0.1",
-      "dependencies": {}
-    },
     "au.benjithatfoxguy.templates.world.2022.3.22f1.updater": {
-      "version": "1.0.1",
-      "dependencies": {}
-    },
-    "au.benjithatfoxguy.batchimportunitypackage": {
-      "version": "1.0.3",
-      "dependencies": {}
+      "version": "1.0.2",
+      "dependencies": {
+        "com.vrchat.worlds": ">=3.7.0"
+      }
     },
     "dev.foxscore.easy-login": {
       "version": "1.0.3",
@@ -92,6 +86,14 @@
     },
     "unity-editor-dark-mode": {
       "version": "1.0.0",
+      "dependencies": {}
+    },
+    "au.benjithatfoxguy.simplebuttonsui": {
+      "version": "0.0.3",
+      "dependencies": {}
+    },
+    "au.benjithatfoxguy.uerp": {
+      "version": "0.0.1",
       "dependencies": {}
     }
   }
