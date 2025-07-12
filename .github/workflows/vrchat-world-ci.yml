@@ -74,9 +74,24 @@ jobs:
           yes | vrc-get repo import repositories.txt
           vrc-get repo list
 
+      - name: Backup the modified VRC autobuild package
+        run: |
+          mkdir -p tmp
+          cp -r Packages/com.yuxiaviation.vrchat.autobuild tmp/com.yuxiaviation.vrchat.autobuild
+          rm -rf Packages/com.yuxiaviation.vrchat.autobuild
+          cp -r Packages/com.yuxiaviation.vrchat.autobuild.world tmp/com.yuxiaviation.vrchat.autobuild.world
+          rm -rf Packages/com.yuxiaviation.vrchat.autobuild.world
+
       - name: Resolve VPM Dependencies
         working-directory: ${{ env.workspace-path }}
         run: "vrc-get resolve"
+
+      - name: Restore modified VRC autobuild package
+        run: |
+          rm -rf Packages/com.yuxiaviation.vrchat.autobuild
+          rm -rf Packages/com.yuxiaviation.vrchat.autobuild.world
+          cp -r tmp/com.yuxiaviation.vrchat.autobuild Packages/com.yuxiaviation.vrchat.autobuild
+          cp -r tmp/com.yuxiaviation.vrchat.autobuild.world Packages/com.yuxiaviation.vrchat.autobuild.world
       
       - name: Remove Unsupported Packages
         if: runner.os == 'Linux'
