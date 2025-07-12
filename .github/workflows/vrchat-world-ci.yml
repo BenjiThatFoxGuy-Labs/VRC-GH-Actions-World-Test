@@ -21,7 +21,7 @@ concurrency:
 jobs:
   build-and-upload-nightly-world:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     env:
       workspace-path: "${{ github.workspace }}"
       source-path: "${{ github.workspace }}"
