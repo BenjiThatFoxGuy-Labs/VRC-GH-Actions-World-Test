@@ -94,11 +94,11 @@ jobs:
           vrc-get remove dev.foxscore.easy-login au.benjithatfoxguy.templates.world.2022.3.22f1.updater com.nidonocu.vrcunitytoolbar au.benjithatfoxguy.batchimportunitypackage au.benjithatfoxguy.restartunity dev.hai-vr.resilience.let-me-see dev.hai-vr.resilience.toolkit unity-editor-dark-mode -y
           vrc-get remove numeira.auto-certify-copyright-agreement -y
 
-      - name: Add AutoBuild Packages to Workspace
-        if: runner.os == 'Linux'
-        working-directory: ${{ env.workspace-path }}
-        # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
-        run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y || true
+      # - name: Add AutoBuild Packages to Workspace
+      #   if: runner.os == 'Linux'
+      #   working-directory: ${{ env.workspace-path }}
+      #   # run: vrc-get install com.yuxiaviation.vrchat.autobuild.world 0.3.0 -y
+      #   run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y || true
 
       - name: Add AutoBuild Packages to Workspace
         if: runner.os == 'Windows'

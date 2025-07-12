@@ -35,6 +35,12 @@
     },
     "au.benjithatfoxguy.uerp": {
       "version": "0.0.1"
+    },
+    "com.yuxiaviation.vrchat.autobuild": {
+      "version": "0.3.1"
+    },
+    "com.yuxiaviation.vrchat.autobuild.world": {
+      "version": "0.3.1"
     }
   },
   "locked": {
@@ -95,6 +101,19 @@
     "au.benjithatfoxguy.uerp": {
       "version": "0.0.1",
       "dependencies": {}
+    },
+    "com.yuxiaviation.vrchat.autobuild": {
+      "version": "0.3.1",
+      "dependencies": {
+        "com.vrchat.base": "^3.7.1"
+      }
+    },
+    "com.yuxiaviation.vrchat.autobuild.world": {
+      "version": "0.3.1",
+      "dependencies": {
+        "com.vrchat.worlds": "^3.7.1",
+        "com.yuxiaviation.vrchat.autobuild": "0.3.1"
+      }
     }
   }
 }
