@@ -29,6 +29,7 @@ jobs:
       add-packages-script-path: "${{ github.workspace }}/.github/workflow-scripts/add-user-package-to-vrc-get.js"
       get-serial-script-path: "${{ github.workspace }}/.github/workflow-scripts/get-serial-from-license-file.js"
       UNITY_SERIAL: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -40,16 +41,19 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /home/runner/Unity/
-          key: unity-installation-2022.3.22f1-887be4894c44
+          # Keep this key aligned with the actual unity-version input below.
+          key: unity-installation-2022.3.22f1
 
       - name: Set up Unity
         if: steps.cache-unity-installation.outputs.cache-hit != 'true'
         id: unity-setup
         uses: buildalon/unity-setup@v1.0.20
         with:
-          unity-version: 2022.3.22f1 (887be4894c44)
+          # IMPORTANT: must be just the version. The "(hash)" breaks editor detection and caused your failure.
+          unity-version: 2022.3.22f1
           modules: windows-il2cpp, ios, android
 
+      # Always set UNITY_EDITOR_PATH (even when the cache hits and unity-setup is skipped)
       - name: Set UNITY_EDITOR_PATH
         run: |
           echo "UNITY_EDITOR_PATH=/home/runner/Unity/Hub/Editor/2022.3.22f1/Editor/Unity" >> $GITHUB_ENV
