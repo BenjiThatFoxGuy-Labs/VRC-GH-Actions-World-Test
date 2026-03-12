@@ -48,7 +48,11 @@ jobs:
         uses: buildalon/unity-setup@v1.0.20
         with:
           unity-version: 2022.3.22f1 (887be4894c44)
-          modules: windows-il2cpp, ios, android 
+          modules: windows-il2cpp, ios, android
+
+      - name: Set UNITY_EDITOR_PATH
+        run: |
+          echo "UNITY_EDITOR_PATH=/home/runner/Unity/Hub/Editor/2022.3.22f1/Editor/Unity" >> $GITHUB_ENV
 
       - name: Download Release Package
         uses: robinraju/release-downloader@a96f54c1b5f5e09e47d9504526e96febd949d4c2
@@ -92,7 +96,7 @@ jobs:
           rm -rf Packages/com.yuxiaviation.vrchat.autobuild.world
           cp -r tmp/com.yuxiaviation.vrchat.autobuild Packages/com.yuxiaviation.vrchat.autobuild
           cp -r tmp/com.yuxiaviation.vrchat.autobuild.world Packages/com.yuxiaviation.vrchat.autobuild.world
-      
+
       - name: Remove Unsupported Packages
         if: runner.os == 'Linux'
         working-directory: ${{ env.workspace-path }}
@@ -162,10 +166,10 @@ jobs:
         if: runner.os == 'Linux'
         continue-on-error: true
         run: |
-          "/home/runner/Unity/Hub/Editor/2022.3.22f1/Editor/Unity" -nographics -headless -projectPath "${{ env.workspace-path }}" -username "${{ secrets.UNITY_EMAIL }}" -password "${{ secrets.UNITY_PASSWORD }}" -serial "${{ env.UNITY_SERIAL }}" -batchmode -logFile - -buildTarget Win64 -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
+          "$UNITY_EDITOR_PATH" -nographics -headless -projectPath "${{ env.workspace-path }}" -username "${{ secrets.UNITY_EMAIL }}" -password "${{ secrets.UNITY_PASSWORD }}" -serial "${{ env.UNITY_SERIAL }}" -batchmode -logFile - -buildTarget Win64 -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
           VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
-          VRC_AUTO_BUILD_SCENE_PATH: Assets\Scenes\VRCDefaultWorldScene.unity
+          VRC_AUTO_BUILD_SCENE_PATH: Assets/Scenes/VRCDefaultWorldScene.unity
           VRC_AUTO_BUILD_USERNAME: ${{ secrets.VRC_AUTO_BUILD_USERNAME }}
           VRC_AUTO_BUILD_PASSWORD: ${{ secrets.VRC_AUTO_BUILD_PASSWORD }}
           VRC_AUTO_BUILD_TOTP_KEY: ${{ secrets.VRC_AUTO_BUILD_TOTP_KEY }}
@@ -177,13 +181,13 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          ${{ steps.unity-setup.outputs.unity-path }} \
-            -projectPath "${{ env.workspace-path }}" \
-            -username "${{ secrets.UNITY_EMAIL }}" \
-            -password "${{ secrets.UNITY_PASSWORD }}" \
-            -serial "${{ env.UNITY_SERIAL }}" \
-            -batchmode -logFile - \
-            -buildTarget Win64 \
+          ${{ steps.unity-setup.outputs.unity-path }} `
+            -projectPath "${{ env.workspace-path }}" `
+            -username "${{ secrets.UNITY_EMAIL }}" `
+            -password "${{ secrets.UNITY_PASSWORD }}" `
+            -serial "${{ env.UNITY_SERIAL }}" `
+            -batchmode -logFile - `
+            -buildTarget Win64 `
             -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
           VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
